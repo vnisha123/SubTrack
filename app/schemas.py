@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field, ConfigDict, EmailStr
+from typing import Optional
 from enum import Enum
 from decimal import Decimal
 from datetime import date
@@ -33,3 +34,9 @@ class SubResponse(BaseModel):
     next_billing_date: date
 
     model_config = ConfigDict(from_attributes=True)
+
+class SubUpdate(BaseModel):
+    service_name: Optional[str] = Field(None, description="Update the name of the service")
+    cost: Optional[Decimal] = Field(None, ge=0, decimal_places=2)
+    billing_cycle: Optional[BillingCycle] = Field(None)
+    next_billing_date: Optional[date] = Field(None)
