@@ -27,7 +27,7 @@ This project features secure user authentication, JWT token-based authorization,
 
 ---
 
-## 📦 Setup and Installation
+## Setup and Installation
 
 Follow these steps to configure the environment and run the application locally:
 
