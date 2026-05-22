@@ -27,4 +27,29 @@ This project features secure user authentication, JWT token-based authorization,
 
 ---
 
+## 📦 Setup and Installation
+
+Follow these steps to configure the environment and run the application locally:
+
+### 1. Environment Variables Configuration
+Create a file named `.env` in the root folder of your project and add your database and authentication secrets:
+
+```env
+DATABASE_URL=postgresql://your_user:your_password@localhost:5432/db_name
+SECRET_KEY=secret_jwt_signing_key
+```
+
+## Dependency Installation
+
+### Create and activate a virtual environment
+*  **`python -m venv venv`**
+*  **`venv\Scripts\activate`** (for windows)
+
+### Install system dependencies
+*  **`pip install -r requirements.txt`**
+
+### 3. Starting the Application
+* Launch the local development server using Uvicorn:
+**`uvicorn main:app --reload`**
+
 
