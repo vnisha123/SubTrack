@@ -6,7 +6,7 @@ from app.database import db_dep
 router = APIRouter()
 
 @router.post("/subscriptions",response_model=SubResponse)
-async def create_sub( sub: SubCreate, db:db_dep,current_user: models.User = Depends(get_current_user)):
+def create_sub( sub: SubCreate, db:db_dep,current_user: models.User = Depends(get_current_user)):
 
     sub_data = sub.model_dump()
 
@@ -18,14 +18,14 @@ async def create_sub( sub: SubCreate, db:db_dep,current_user: models.User = Depe
     return new_sub
 
 @router.get("/subscriptions", response_model=list[SubResponse])
-async def get_all_user_subscriptions(db: db_dep,current_user: models.User = Depends(get_current_user)):
+def get_all_user_subscriptions(db: db_dep,current_user: models.User = Depends(get_current_user)):
     
     subscriptions = db.query(models.Sub).filter(models.Sub.user_id == current_user.id).all()
     return subscriptions
 
 
 @router.get("/subscriptions/{sub_id}", response_model=SubResponse)
-async def get_sub(sub_id: int, db: db_dep, current_user: models.User = Depends(get_current_user)):
+def get_sub(sub_id: int, db: db_dep, current_user: models.User = Depends(get_current_user)):
 
     sub = db.query(models.Sub).filter(models.Sub.id == sub_id).first()
     
@@ -46,7 +46,7 @@ async def get_sub(sub_id: int, db: db_dep, current_user: models.User = Depends(g
 
 
 @router.put("/subscriptions/{sub_id}", response_model=SubResponse)
-async def update_sub(sub_id: int,sub_update: SubUpdate, db: db_dep,current_user: models.User = Depends(get_current_user)):
+def update_sub(sub_id: int,sub_update: SubUpdate, db: db_dep,current_user: models.User = Depends(get_current_user)):
    
     sub = db.query(models.Sub).filter(models.Sub.id == sub_id).first()
     
@@ -73,7 +73,7 @@ async def update_sub(sub_id: int,sub_update: SubUpdate, db: db_dep,current_user:
 
 
 @router.delete("/subscriptions/{sub_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_sub(
+def delete_sub(
     sub_id: int,
     db: db_dep,
     current_user: models.User = Depends(get_current_user)
